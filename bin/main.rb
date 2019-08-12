@@ -84,6 +84,12 @@ def product(url, logger=Logger.new(STDOUT))
 
     logger.debug(variant_url_msg(variant_url))
 
+    # Trying to retrieve variant specific image, but with no success:
+    # e.g. https://www.petsonic.com/huesos-delibones-para-perro.html#/489-tamano-11_cm
+    # in browser shows different from https://www.petsonic.com/huesos-delibones-para-perro.html
+    # image, but if we take this page with curb - we get old product image here.
+    # Seems like images swaps with javascript when page is loading.
+    # May be there is another way to get a variant specific image?
     variants_html = load_page(variant_url)
     variants_doc = Nokogiri::HTML(variants_html)
 
